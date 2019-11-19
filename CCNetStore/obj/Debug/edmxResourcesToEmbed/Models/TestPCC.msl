@@ -1,0 +1,48 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+  <EntityContainerMapping StorageEntityContainer="Хранилище CCStoreModelContainer" CdmEntityContainer="CCStoreEntities">
+    <EntitySetMapping Name="carts">
+      <EntityTypeMapping TypeName="CCStoreModel.cart">
+        <MappingFragment StoreEntitySet="cart">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="clientId" ColumnName="clientId" />
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="cpQuantity" ColumnName="cpQuantity" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="clients">
+      <EntityTypeMapping TypeName="CCStoreModel.client">
+        <MappingFragment StoreEntitySet="client">
+          <ScalarProperty Name="clientId" ColumnName="clientId" />
+          <ScalarProperty Name="clientLogin" ColumnName="clientLogin" />
+          <ScalarProperty Name="clientPassword" ColumnName="clientPassword" />
+          <ScalarProperty Name="clientRole" ColumnName="clientRole" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="Orders">
+      <EntityTypeMapping TypeName="CCStoreModel.Order">
+        <MappingFragment StoreEntitySet="Order">
+          <ScalarProperty Name="Id" ColumnName="Id" />
+          <ScalarProperty Name="clientId" ColumnName="clientId" />
+          <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+          <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+          <ScalarProperty Name="orderStatus" ColumnName="orderStatus" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+    <EntitySetMapping Name="products">
+      <EntityTypeMapping TypeName="CCStoreModel.product">
+        <MappingFragment StoreEntitySet="product">
+          <ScalarProperty Name="productId" ColumnName="productId" />
+          <ScalarProperty Name="productName" ColumnName="productName" />
+          <ScalarProperty Name="productQuantity" ColumnName="productQuantity" />
+          <ScalarProperty Name="productDescription" ColumnName="productDescription" />
+          <ScalarProperty Name="productPrice" ColumnName="productPrice" />
+        </MappingFragment>
+      </EntityTypeMapping>
+    </EntitySetMapping>
+  </EntityContainerMapping>
+</Mapping>

@@ -1,0 +1,102 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Schema Namespace="CCStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+  <EntityType Name="cart">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="clientId" Type="Int32" Nullable="false" />
+    <Property Name="productId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="productName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="cpQuantity" Type="Int32" />
+    <NavigationProperty Name="client" Relationship="Self.clientIdFK" FromRole="cart" ToRole="client" />
+    <NavigationProperty Name="product" Relationship="Self.productIdFK" FromRole="cart" ToRole="product" />
+  </EntityType>
+  <EntityType Name="client">
+    <Key>
+      <PropertyRef Name="clientId" />
+    </Key>
+    <Property Name="clientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="clientLogin" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+    <Property Name="clientPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <Property Name="clientRole" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+    <NavigationProperty Name="carts" Relationship="Self.clientIdFK" FromRole="client" ToRole="cart" />
+    <NavigationProperty Name="Orders" Relationship="Self.clientIdFK_Order" FromRole="client" ToRole="Order" />
+  </EntityType>
+  <EntityType Name="Order">
+    <Key>
+      <PropertyRef Name="Id" />
+    </Key>
+    <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+    <Property Name="clientId" Type="Int32" Nullable="false" />
+    <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="totalPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+    <Property Name="orderStatus" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <NavigationProperty Name="client" Relationship="Self.clientIdFK_Order" FromRole="Order" ToRole="client" />
+  </EntityType>
+  <EntityType Name="product">
+    <Key>
+      <PropertyRef Name="productId" />
+    </Key>
+    <Property Name="productId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="productName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+    <Property Name="productQuantity" Type="Int32" />
+    <Property Name="productDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+    <Property Name="productPrice" Type="Decimal" Precision="19" Scale="4" />
+    <NavigationProperty Name="carts" Relationship="Self.productIdFK" FromRole="product" ToRole="cart" />
+  </EntityType>
+  <Association Name="clientIdFK">
+    <End Role="client" Type="Self.client" Multiplicity="1" />
+    <End Role="cart" Type="Self.cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="client">
+        <PropertyRef Name="clientId" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="clientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="productIdFK">
+    <End Role="product" Type="Self.product" Multiplicity="0..1" />
+    <End Role="cart" Type="Self.cart" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="product">
+        <PropertyRef Name="productId" />
+      </Principal>
+      <Dependent Role="cart">
+        <PropertyRef Name="productId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <Association Name="clientIdFK_Order">
+    <End Role="client" Type="Self.client" Multiplicity="1" />
+    <End Role="Order" Type="Self.Order" Multiplicity="*" />
+    <ReferentialConstraint>
+      <Principal Role="client">
+        <PropertyRef Name="clientId" />
+      </Principal>
+      <Dependent Role="Order">
+        <PropertyRef Name="clientId" />
+      </Dependent>
+    </ReferentialConstraint>
+  </Association>
+  <EntityContainer Name="CCStoreEntities" annotation:LazyLoadingEnabled="true">
+    <EntitySet Name="carts" EntityType="Self.cart" />
+    <EntitySet Name="clients" EntityType="Self.client" />
+    <EntitySet Name="Orders" EntityType="Self.Order" />
+    <EntitySet Name="products" EntityType="Self.product" />
+    <AssociationSet Name="clientIdFK" Association="Self.clientIdFK">
+      <End Role="client" EntitySet="clients" />
+      <End Role="cart" EntitySet="carts" />
+    </AssociationSet>
+    <AssociationSet Name="productIdFK" Association="Self.productIdFK">
+      <End Role="product" EntitySet="products" />
+      <End Role="cart" EntitySet="carts" />
+    </AssociationSet>
+    <AssociationSet Name="clientIdFK_Order" Association="Self.clientIdFK_Order">
+      <End Role="client" EntitySet="clients" />
+      <End Role="Order" EntitySet="Orders" />
+    </AssociationSet>
+  </EntityContainer>
+</Schema>

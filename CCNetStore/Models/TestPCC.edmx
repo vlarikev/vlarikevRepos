@@ -1,0 +1,277 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<edmx:Edmx Version="3.0" xmlns:edmx="http://schemas.microsoft.com/ado/2009/11/edmx">
+  <!-- EF Runtime content -->
+  <edmx:Runtime>
+    <!-- SSDL content -->
+    <edmx:StorageModels>
+      <Schema Namespace="Хранилище CCStoreModel" Provider="System.Data.SqlClient" ProviderManifestToken="2012" Alias="Self" xmlns:store="http://schemas.microsoft.com/ado/2007/12/edm/EntityStoreSchemaGenerator" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm/ssdl">
+        <EntityType Name="cart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clientId" Type="int" Nullable="false" />
+          <Property Name="productId" Type="varchar" MaxLength="20" />
+          <Property Name="productName" Type="varchar" MaxLength="50" />
+          <Property Name="cpQuantity" Type="int" />
+        </EntityType>
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="clientId" />
+          </Key>
+          <Property Name="clientId" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clientLogin" Type="varchar" MaxLength="55" />
+          <Property Name="clientPassword" Type="varchar" MaxLength="20" />
+          <Property Name="clientRole" Type="varchar" MaxLength="20" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
+          <Property Name="clientId" Type="int" Nullable="false" />
+          <Property Name="orderDate" Type="date" Nullable="false" />
+          <Property Name="totalPrice" Type="money" Nullable="false" />
+          <Property Name="orderStatus" Type="varchar" MaxLength="40" Nullable="false" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="productId" />
+          </Key>
+          <Property Name="productId" Type="varchar" MaxLength="20" Nullable="false" />
+          <Property Name="productName" Type="varchar" MaxLength="50" />
+          <Property Name="productQuantity" Type="int" />
+          <Property Name="productDescription" Type="varchar" MaxLength="255" />
+          <Property Name="productPrice" Type="money" />
+        </EntityType>
+        <Association Name="clientIdFK">
+          <End Role="client" Type="Self.client" Multiplicity="1" />
+          <End Role="cart" Type="Self.cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="clientId" />
+            </Principal>
+            <Dependent Role="cart">
+              <PropertyRef Name="clientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="clientIdFK_Order">
+          <End Role="client" Type="Self.client" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="clientId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="clientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="productIdFK">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="cart" Type="Self.cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="productId" />
+            </Principal>
+            <Dependent Role="cart">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="Хранилище CCStoreModelContainer">
+          <EntitySet Name="cart" EntityType="Self.cart" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="client" EntityType="Self.client" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="Order" EntityType="Self.Order" Schema="dbo" store:Type="Tables" />
+          <EntitySet Name="product" EntityType="Self.product" Schema="dbo" store:Type="Tables" />
+          <AssociationSet Name="clientIdFK" Association="Self.clientIdFK">
+            <End Role="client" EntitySet="client" />
+            <End Role="cart" EntitySet="cart" />
+          </AssociationSet>
+          <AssociationSet Name="clientIdFK_Order" Association="Self.clientIdFK_Order">
+            <End Role="client" EntitySet="client" />
+            <End Role="Order" EntitySet="Order" />
+          </AssociationSet>
+          <AssociationSet Name="productIdFK" Association="Self.productIdFK">
+            <End Role="product" EntitySet="product" />
+            <End Role="cart" EntitySet="cart" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:StorageModels>
+    <!-- CSDL content -->
+    <edmx:ConceptualModels>
+      <Schema Namespace="CCStoreModel" Alias="Self" annotation:UseStrongSpatialTypes="false" xmlns:annotation="http://schemas.microsoft.com/ado/2009/02/edm/annotation" xmlns:customannotation="http://schemas.microsoft.com/ado/2013/11/edm/customannotation" xmlns="http://schemas.microsoft.com/ado/2009/11/edm">
+        <EntityType Name="cart">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clientId" Type="Int32" Nullable="false" />
+          <Property Name="productId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="productName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="cpQuantity" Type="Int32" />
+          <NavigationProperty Name="client" Relationship="Self.clientIdFK" FromRole="cart" ToRole="client" />
+          <NavigationProperty Name="product" Relationship="Self.productIdFK" FromRole="cart" ToRole="product" />
+        </EntityType>
+        <EntityType Name="client">
+          <Key>
+            <PropertyRef Name="clientId" />
+          </Key>
+          <Property Name="clientId" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clientLogin" Type="String" MaxLength="55" FixedLength="false" Unicode="false" />
+          <Property Name="clientPassword" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <Property Name="clientRole" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
+          <NavigationProperty Name="carts" Relationship="Self.clientIdFK" FromRole="client" ToRole="cart" />
+          <NavigationProperty Name="Orders" Relationship="Self.clientIdFK_Order" FromRole="client" ToRole="Order" />
+        </EntityType>
+        <EntityType Name="Order">
+          <Key>
+            <PropertyRef Name="Id" />
+          </Key>
+          <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
+          <Property Name="clientId" Type="Int32" Nullable="false" />
+          <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="0" />
+          <Property Name="totalPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
+          <Property Name="orderStatus" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+          <NavigationProperty Name="client" Relationship="Self.clientIdFK_Order" FromRole="Order" ToRole="client" />
+        </EntityType>
+        <EntityType Name="product">
+          <Key>
+            <PropertyRef Name="productId" />
+          </Key>
+          <Property Name="productId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" Nullable="false" />
+          <Property Name="productName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
+          <Property Name="productQuantity" Type="Int32" />
+          <Property Name="productDescription" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
+          <Property Name="productPrice" Type="Decimal" Precision="19" Scale="4" />
+          <NavigationProperty Name="carts" Relationship="Self.productIdFK" FromRole="product" ToRole="cart" />
+        </EntityType>
+        <Association Name="clientIdFK">
+          <End Role="client" Type="Self.client" Multiplicity="1" />
+          <End Role="cart" Type="Self.cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="clientId" />
+            </Principal>
+            <Dependent Role="cart">
+              <PropertyRef Name="clientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="productIdFK">
+          <End Role="product" Type="Self.product" Multiplicity="0..1" />
+          <End Role="cart" Type="Self.cart" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="product">
+              <PropertyRef Name="productId" />
+            </Principal>
+            <Dependent Role="cart">
+              <PropertyRef Name="productId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <Association Name="clientIdFK_Order">
+          <End Role="client" Type="Self.client" Multiplicity="1" />
+          <End Role="Order" Type="Self.Order" Multiplicity="*" />
+          <ReferentialConstraint>
+            <Principal Role="client">
+              <PropertyRef Name="clientId" />
+            </Principal>
+            <Dependent Role="Order">
+              <PropertyRef Name="clientId" />
+            </Dependent>
+          </ReferentialConstraint>
+        </Association>
+        <EntityContainer Name="CCStoreEntities" annotation:LazyLoadingEnabled="true">
+          <EntitySet Name="carts" EntityType="Self.cart" />
+          <EntitySet Name="clients" EntityType="Self.client" />
+          <EntitySet Name="Orders" EntityType="Self.Order" />
+          <EntitySet Name="products" EntityType="Self.product" />
+          <AssociationSet Name="clientIdFK" Association="Self.clientIdFK">
+            <End Role="client" EntitySet="clients" />
+            <End Role="cart" EntitySet="carts" />
+          </AssociationSet>
+          <AssociationSet Name="productIdFK" Association="Self.productIdFK">
+            <End Role="product" EntitySet="products" />
+            <End Role="cart" EntitySet="carts" />
+          </AssociationSet>
+          <AssociationSet Name="clientIdFK_Order" Association="Self.clientIdFK_Order">
+            <End Role="client" EntitySet="clients" />
+            <End Role="Order" EntitySet="Orders" />
+          </AssociationSet>
+        </EntityContainer>
+      </Schema>
+    </edmx:ConceptualModels>
+    <!-- C-S mapping content -->
+    <edmx:Mappings>
+      <Mapping Space="C-S" xmlns="http://schemas.microsoft.com/ado/2009/11/mapping/cs">
+        <EntityContainerMapping StorageEntityContainer="Хранилище CCStoreModelContainer" CdmEntityContainer="CCStoreEntities">
+          <EntitySetMapping Name="carts">
+            <EntityTypeMapping TypeName="CCStoreModel.cart">
+              <MappingFragment StoreEntitySet="cart">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="clientId" ColumnName="clientId" />
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="cpQuantity" ColumnName="cpQuantity" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="clients">
+            <EntityTypeMapping TypeName="CCStoreModel.client">
+              <MappingFragment StoreEntitySet="client">
+                <ScalarProperty Name="clientId" ColumnName="clientId" />
+                <ScalarProperty Name="clientLogin" ColumnName="clientLogin" />
+                <ScalarProperty Name="clientPassword" ColumnName="clientPassword" />
+                <ScalarProperty Name="clientRole" ColumnName="clientRole" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="Orders">
+            <EntityTypeMapping TypeName="CCStoreModel.Order">
+              <MappingFragment StoreEntitySet="Order">
+                <ScalarProperty Name="Id" ColumnName="Id" />
+                <ScalarProperty Name="clientId" ColumnName="clientId" />
+                <ScalarProperty Name="orderDate" ColumnName="orderDate" />
+                <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
+                <ScalarProperty Name="orderStatus" ColumnName="orderStatus" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+          <EntitySetMapping Name="products">
+            <EntityTypeMapping TypeName="CCStoreModel.product">
+              <MappingFragment StoreEntitySet="product">
+                <ScalarProperty Name="productId" ColumnName="productId" />
+                <ScalarProperty Name="productName" ColumnName="productName" />
+                <ScalarProperty Name="productQuantity" ColumnName="productQuantity" />
+                <ScalarProperty Name="productDescription" ColumnName="productDescription" />
+                <ScalarProperty Name="productPrice" ColumnName="productPrice" />
+              </MappingFragment>
+            </EntityTypeMapping>
+          </EntitySetMapping>
+        </EntityContainerMapping>
+      </Mapping>
+    </edmx:Mappings>
+  </edmx:Runtime>
+  <!-- EF Designer content (DO NOT EDIT MANUALLY BELOW HERE) -->
+  <Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
+    <Connection>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="MetadataArtifactProcessing" Value="EmbedInOutputAssembly" />
+      </DesignerInfoPropertySet>
+    </Connection>
+    <Options>
+      <DesignerInfoPropertySet>
+        <DesignerProperty Name="ValidateOnBuild" Value="true" />
+        <DesignerProperty Name="EnablePluralization" Value="true" />
+        <DesignerProperty Name="IncludeForeignKeysInModel" Value="true" />
+        <DesignerProperty Name="UseLegacyProvider" Value="false" />
+        <DesignerProperty Name="CodeGenerationStrategy" Value="Нет" />
+      </DesignerInfoPropertySet>
+    </Options>
+    <!-- Diagram content (shape and connector positions) -->
+    <Diagrams></Diagrams>
+  </Designer>
+</edmx:Edmx>

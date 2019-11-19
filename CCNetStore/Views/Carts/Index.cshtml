@@ -1,0 +1,53 @@
+﻿@model IEnumerable<CCNetStore.Models.cart>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Cart</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.client.clientLogin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.productId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.productName)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.cpQuantity)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.product.productPrice)
+        </th>
+        <th></th>
+    </tr>
+
+@foreach (var item in Model) {
+    <tr>
+        <td>
+            @Html.DisplayFor(modelItem => item.client.clientLogin)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.productId)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.productName)
+        </td>
+        <td>
+            @Html.DisplayFor(modelItem => item.cpQuantity)
+        </td>
+        <td>
+                @Html.DisplayFor(modelItem => item.product.productPrice)
+            </td>
+        <td>
+            @Html.ActionLink("Details", "Details", new { id = item.Id }) |
+            @Html.ActionLink("Delete", "Delete", new { id = item.Id, pId = item.productId })
+        </td>
+    </tr>
+}
+
+</table>

@@ -1,0 +1,54 @@
+﻿@model IEnumerable<CCNetStore.Models.Order>
+
+@{
+    ViewBag.Title = "Index";
+}
+
+<h2>Orders @User.Identity.Name</h2>
+
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.clientId)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.client.clientLogin)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.orderDate)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.totalPrice)
+        </th>
+        <th>
+            @Html.DisplayNameFor(model => model.orderStatus)
+        </th>
+        <th></th>
+    </tr>
+
+    @foreach (var item in Model)
+    {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.clientId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.client.clientLogin)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.orderDate)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.totalPrice)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.orderStatus)
+            </td>
+            <td>
+                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+            </td>
+        </tr>
+    }
+
+</table>

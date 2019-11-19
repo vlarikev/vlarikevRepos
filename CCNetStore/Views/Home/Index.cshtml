@@ -1,0 +1,35 @@
+﻿
+@{
+    ViewBag.Title = "Index";
+}
+
+@if (User.Identity.IsAuthenticated)
+{
+    <div>
+        <h2>You are authorized as @User.Identity.Name</h2>
+        @switch (User.Identity.Name)
+        {
+            case ("admin@mail.com"):
+                <h3>@Html.ActionLink("Admin Page", "IndexAdmin", "Home")</h3>
+                break;
+            case ("manager@mail.com"):
+                <h3>@Html.ActionLink("Manager Page", "IndexManager", "Home")</h3>
+                break;
+        }
+        @if (User.Identity.IsAuthenticated)
+        {
+            if (User.Identity.Name != "admin@mail.com" && User.Identity.Name != "manager@mail.com")
+            {
+                <h3>@Html.ActionLink("Client Page", "IndexClient", "Home")</h3>
+            }
+        }
+    </div>
+}
+else
+{
+    <div>
+        <h2>You are not loginned or registered</h2>
+        <h3>@Html.ActionLink("Registration", "Register", "Account", routeValues: null, htmlAttributes: new { id = "registerLink" })</h3>
+        <h3>@Html.ActionLink("Login", "Login", "Account", routeValues: null, htmlAttributes: new { id = "loginLink" })</h3>
+    </div>
+}
