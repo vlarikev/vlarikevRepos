@@ -76,7 +76,7 @@ namespace CCNetStore.Controllers
             product.productQuantity++;
 
             db.SaveChanges();
-            if(User.Identity.Name == "admin@mail.com" || User.Identity.Name == "manager@mail.com")
+            if(User.IsInRole("admin") || User.IsInRole("manager"))
             {
                 return RedirectToAction("Index");
             }

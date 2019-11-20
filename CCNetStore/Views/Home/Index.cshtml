@@ -7,21 +7,17 @@
 {
     <div>
         <h2>You are authorized as @User.Identity.Name</h2>
-        @switch (User.Identity.Name)
+        @if (User.IsInRole("admin"))
         {
-            case ("admin@mail.com"):
-                <h3>@Html.ActionLink("Admin Page", "IndexAdmin", "Home")</h3>
-                break;
-            case ("manager@mail.com"):
-                <h3>@Html.ActionLink("Manager Page", "IndexManager", "Home")</h3>
-                break;
+            <h3>@Html.ActionLink("Admin Page", "IndexAdmin", "Home")</h3>
         }
-        @if (User.Identity.IsAuthenticated)
+        else if (User.IsInRole("manager"))
         {
-            if (User.Identity.Name != "admin@mail.com" && User.Identity.Name != "manager@mail.com")
-            {
-                <h3>@Html.ActionLink("Client Page", "IndexClient", "Home")</h3>
-            }
+            <h3>@Html.ActionLink("Manager Page", "IndexManager", "Home")</h3>
+        }
+        else
+        {
+            <h3>@Html.ActionLink("Client Page", "IndexClient", "Home")</h3>
         }
     </div>
 }

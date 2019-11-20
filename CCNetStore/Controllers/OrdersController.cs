@@ -132,7 +132,7 @@ namespace CCNetStore.Controllers
             Order order = db.Orders.Find(id);
             db.Orders.Remove(order);
             db.SaveChanges();
-            if (User.Identity.Name == "admin@mail.com" || User.Identity.Name == "manager@mail.com")
+            if (User.IsInRole("admin") || User.IsInRole("manager"))
             {
                 return RedirectToAction("Index");
             }
