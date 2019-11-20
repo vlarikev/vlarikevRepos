@@ -11,6 +11,7 @@
     <h4>cart</h4>
     <hr />
     <dl class="dl-horizontal">
+        @Html.HiddenFor(model => model.productStatus)
         <dt>
             @Html.DisplayNameFor(model => model.client.clientLogin)
         </dt>
@@ -39,7 +40,7 @@
 
         <div class="form-actions no-color">
             <input type="submit" value="Delete" class="btn btn-default" /> |
-            @if (User.Identity.Name == "admin@mail.com" || User.Identity.Name == "manager@mail.com")
+            @if (User.IsInRole("admin") || User.IsInRole("manager"))
             {
                 @Html.ActionLink("Back to List", "Index")
             }

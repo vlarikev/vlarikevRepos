@@ -20,10 +20,7 @@ namespace CCNetStore.Controllers
         {
             int clientId = db.clients.FirstOrDefault(u => u.clientLogin == User.Identity.Name).clientId;
 
-            db.carts.Add(new cart { clientId = clientId, productId = id, productName = name, cpQuantity = 1});
-
-            var product = db.products.Where(o => o.productId == id).FirstOrDefault();
-            product.productQuantity--;
+            db.carts.Add(new cart { clientId = clientId, productId = id, productName = name, cpQuantity = 1, productStatus = "free"});
             db.SaveChanges();
 
             return View();
@@ -70,7 +67,7 @@ namespace CCNetStore.Controllers
         [Authorize(Roles = "admin, manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Create([Bind(Include = "productId,productName,productQuantity,productDescription,productPrice")] product product)
+        public ActionResult Create([Bind(Include = "productId,productName,productQuantity,productDescription,productPrice,productStatus")] product product)
         {
             if (ModelState.IsValid)
             {
@@ -102,7 +99,7 @@ namespace CCNetStore.Controllers
         [Authorize(Roles = "admin, manager")]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "productId,productName,productQuantity,productDescription,productPrice")] product product)
+        public ActionResult Edit([Bind(Include = "productId,productName,productQuantity,productDescription,productPrice,productStatus")] product product)
         {
             if (ModelState.IsValid)
             {

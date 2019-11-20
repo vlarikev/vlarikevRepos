@@ -9,6 +9,7 @@
     <Property Name="productId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <Property Name="productName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
     <Property Name="cpQuantity" Type="Int32" />
+    <Property Name="productStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="client" Relationship="Self.clientIdFK" FromRole="cart" ToRole="client" />
     <NavigationProperty Name="product" Relationship="Self.productIdFK" FromRole="cart" ToRole="product" />
   </EntityType>

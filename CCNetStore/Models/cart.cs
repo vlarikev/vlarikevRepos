@@ -19,6 +19,7 @@ namespace CCNetStore.Models
         public string productId { get; set; }
         public string productName { get; set; }
         public Nullable<int> cpQuantity { get; set; }
+        public string productStatus { get; set; }
     
         public virtual client client { get; set; }
         public virtual product product { get; set; }

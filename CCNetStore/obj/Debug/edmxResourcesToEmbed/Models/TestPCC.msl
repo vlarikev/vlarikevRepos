@@ -9,6 +9,7 @@
           <ScalarProperty Name="productId" ColumnName="productId" />
           <ScalarProperty Name="productName" ColumnName="productName" />
           <ScalarProperty Name="cpQuantity" ColumnName="cpQuantity" />
+          <ScalarProperty Name="productStatus" ColumnName="productStatus" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

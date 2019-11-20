@@ -14,6 +14,7 @@
           <Property Name="productId" Type="varchar" MaxLength="20" />
           <Property Name="productName" Type="varchar" MaxLength="50" />
           <Property Name="cpQuantity" Type="int" />
+          <Property Name="productStatus" Type="varchar" MaxLength="1" />
         </EntityType>
         <EntityType Name="client">
           <Key>
@@ -113,6 +114,7 @@
           <Property Name="productId" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <Property Name="productName" Type="String" MaxLength="50" FixedLength="false" Unicode="false" />
           <Property Name="cpQuantity" Type="Int32" />
+          <Property Name="productStatus" Type="String" MaxLength="20" FixedLength="false" Unicode="false" />
           <NavigationProperty Name="client" Relationship="Self.clientIdFK" FromRole="cart" ToRole="client" />
           <NavigationProperty Name="product" Relationship="Self.productIdFK" FromRole="cart" ToRole="product" />
         </EntityType>
@@ -218,6 +220,7 @@
                 <ScalarProperty Name="productId" ColumnName="productId" />
                 <ScalarProperty Name="productName" ColumnName="productName" />
                 <ScalarProperty Name="cpQuantity" ColumnName="cpQuantity" />
+                <ScalarProperty Name="productStatus" ColumnName="productStatus" />
               </MappingFragment>
             </EntityTypeMapping>
           </EntitySetMapping>

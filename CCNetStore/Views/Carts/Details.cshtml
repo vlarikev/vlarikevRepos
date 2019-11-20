@@ -10,6 +10,7 @@
     <h4>cart</h4>
     <hr />
     <dl class="dl-horizontal">
+        @Html.HiddenFor(model => model.productStatus)
         <dt>
             @Html.DisplayNameFor(model => model.client.clientLogin)
         </dt>
@@ -34,7 +35,7 @@
     </dl>
 </div>
 <p>
-    @if (User.Identity.Name == "admin@mail.com" || User.Identity.Name == "manager@mail.com")
+    @if (User.IsInRole("admin") || User.IsInRole("manager"))
     {
         @Html.ActionLink("Back to List", "Index")
     }

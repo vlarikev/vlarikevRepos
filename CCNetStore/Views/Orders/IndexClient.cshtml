@@ -54,7 +54,7 @@
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id }) |
                 @if (item.deliveryAddress == null)
                 {
-                    @Html.ActionLink("Enter delivery address", "Edit", new { id = item.Id })
+                    @Html.ActionLink("Add delivery address", "Edit", new { id = item.Id })
                 }
                 else
                 {

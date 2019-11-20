@@ -38,7 +38,18 @@ namespace CCNetStore.Controllers
         [Authorize]
         public ActionResult ConfirmOrder()
         {
-            int clientId = db.clients.FirstOrDefault(u => u.clientLogin == User.Identity.Name).clientId;
+            int clientId = db.clients.FirstOrDefault(c => c.clientLogin == User.Identity.Name).clientId;
+
+            var carts = db.carts.Where(c => c.clientId == clientId).ToList();
+            carts.ForEach(c => c.productStatus = "reservated");
+
+            var listId = carts.Select(c => c.productId);
+
+            var products = db.products.Where(p => listId.Contains(p.productId)).ToList();
+            products.ForEach(p => p.productQuantity--);
+
+            db.SaveChanges();
+
             db.Orders.Add(new Order { clientId = clientId, orderDate = DateTime.Now, totalPrice = CartsController.totalPrice, orderStatus = "confirmed", deliveryAddress = null});
             db.SaveChanges();
             CartsController.totalPrice = 0;
@@ -139,6 +150,17 @@ namespace CCNetStore.Controllers
         {
             Order order = db.Orders.Find(id);
             db.Orders.Remove(order);
+            
+            int clientId = db.clients.FirstOrDefault(u => u.clientLogin == User.Identity.Name).clientId;
+            var carts = db.carts.Where(c => c.clientId == clientId).ToList();
+            carts.ForEach(c => c.productStatus = "free");
+
+            var listId = carts.Select(c => c.productId);
+            var products = db.products.Where(p => listId.Contains(p.productId)).ToList();
+            products.ForEach(p => p.productQuantity++);
+
+            db.carts.RemoveRange(carts);
+
             db.SaveChanges();
             if (User.IsInRole("admin") || User.IsInRole("manager"))
             {

@@ -9,6 +9,7 @@
     <Property Name="productId" Type="varchar" MaxLength="20" />
     <Property Name="productName" Type="varchar" MaxLength="50" />
     <Property Name="cpQuantity" Type="int" />
+    <Property Name="productStatus" Type="varchar" MaxLength="1" />
   </EntityType>
   <EntityType Name="client">
     <Key>

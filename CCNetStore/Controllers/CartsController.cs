@@ -20,15 +20,17 @@ namespace CCNetStore.Controllers
         public ActionResult Index()
         {
             var carts = db.carts.Include(c => c.client).Include(c => c.product);
-            return View(carts.ToList());
+            return View(carts.Where(c => c.productStatus == "free").ToList());
         }
         [Authorize(Roles = "client")]
         public ActionResult IndexClient()
         {
             var carts = db.carts.Include(c => c.client).Include(c => c.product);
-
-            totalPrice = carts.Where(c => c.client.clientLogin == User.Identity.Name).Sum(p => p.product.productPrice).Value;
-            return View(carts.Where(c => c.client.clientLogin == User.Identity.Name).ToList());
+            if(carts.Where(c => c.client.clientLogin == User.Identity.Name).FirstOrDefault() != null)
+            {
+                totalPrice = carts.Where(c => c.client.clientLogin == User.Identity.Name).Sum(p => p.product.productPrice).Value;
+            }
+            return View(carts.Where(c => c.client.clientLogin == User.Identity.Name && c.productStatus == "free").ToList());
         }
 
         // GET: Carts/Details/5
@@ -67,13 +69,10 @@ namespace CCNetStore.Controllers
         [Authorize]
         [HttpPost, ActionName("Delete")]
         [ValidateAntiForgeryToken]
-        public ActionResult DeleteConfirmed(int id, string pId)
+        public ActionResult DeleteConfirmed(int id)
         {
             cart cart = db.carts.Find(id);
             db.carts.Remove(cart);
-
-            var product = db.products.Where(o => o.productId == pId).FirstOrDefault();
-            product.productQuantity++;
 
             db.SaveChanges();
             if(User.IsInRole("admin") || User.IsInRole("manager"))
