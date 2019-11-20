@@ -25,9 +25,10 @@
     </Key>
     <Property Name="Id" Type="int" StoreGeneratedPattern="Identity" Nullable="false" />
     <Property Name="clientId" Type="int" Nullable="false" />
-    <Property Name="orderDate" Type="date" Nullable="false" />
+    <Property Name="orderDate" Type="datetime2" Precision="7" Nullable="false" />
     <Property Name="totalPrice" Type="money" Nullable="false" />
     <Property Name="orderStatus" Type="varchar" MaxLength="40" Nullable="false" />
+    <Property Name="deliveryAddress" Type="varchar" MaxLength="255" />
   </EntityType>
   <EntityType Name="product">
     <Key>

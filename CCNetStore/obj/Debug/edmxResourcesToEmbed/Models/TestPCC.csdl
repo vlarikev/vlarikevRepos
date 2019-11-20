@@ -29,9 +29,10 @@
     </Key>
     <Property Name="Id" Type="Int32" Nullable="false" annotation:StoreGeneratedPattern="Identity" />
     <Property Name="clientId" Type="Int32" Nullable="false" />
-    <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="0" />
+    <Property Name="orderDate" Type="DateTime" Nullable="false" Precision="7" />
     <Property Name="totalPrice" Type="Decimal" Precision="19" Scale="4" Nullable="false" />
     <Property Name="orderStatus" Type="String" MaxLength="40" FixedLength="false" Unicode="false" Nullable="false" />
+    <Property Name="deliveryAddress" Type="String" MaxLength="255" FixedLength="false" Unicode="false" />
     <NavigationProperty Name="client" Relationship="Self.clientIdFK_Order" FromRole="Order" ToRole="client" />
   </EntityType>
   <EntityType Name="product">

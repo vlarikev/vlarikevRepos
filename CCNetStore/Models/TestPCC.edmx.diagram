@@ -4,10 +4,10 @@
   <edmx:Designer xmlns="http://schemas.microsoft.com/ado/2009/11/edmx">
     <!-- Diagram content (shape and connector positions) -->
     <edmx:Diagrams>
-      <Diagram DiagramId="c4b7bc08050f4bd2a23b04289fc30b4b" Name="Diagram1">
+      <Diagram DiagramId="8230221771124ce2819e8c7134cbced3" Name="Diagram1">
         <EntityTypeShape EntityType="CCStoreModel.cart" Width="1.5" PointX="3" PointY="3.625" IsExpanded="true" />
         <EntityTypeShape EntityType="CCStoreModel.client" Width="1.5" PointX="0.75" PointY="3.75" IsExpanded="true" />
-        <EntityTypeShape EntityType="CCStoreModel.Order" Width="1.5" PointX="3" PointY="6.875" IsExpanded="true" />
+        <EntityTypeShape EntityType="CCStoreModel.Order" Width="1.5" PointX="3" PointY="6.75" IsExpanded="true" />
         <EntityTypeShape EntityType="CCStoreModel.product" Width="1.5" PointX="0.75" PointY="0.75" IsExpanded="true" />
         <AssociationConnector Association="CCStoreModel.clientIdFK" ManuallyRouted="false" />
         <AssociationConnector Association="CCStoreModel.productIdFK" ManuallyRouted="false" />

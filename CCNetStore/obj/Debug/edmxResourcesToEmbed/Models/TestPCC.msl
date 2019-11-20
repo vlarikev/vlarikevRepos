@@ -30,6 +30,7 @@
           <ScalarProperty Name="orderDate" ColumnName="orderDate" />
           <ScalarProperty Name="totalPrice" ColumnName="totalPrice" />
           <ScalarProperty Name="orderStatus" ColumnName="orderStatus" />
+          <ScalarProperty Name="deliveryAddress" ColumnName="deliveryAddress" />
         </MappingFragment>
       </EntityTypeMapping>
     </EntitySetMapping>

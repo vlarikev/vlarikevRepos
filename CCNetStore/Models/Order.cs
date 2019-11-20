@@ -19,6 +19,7 @@ namespace CCNetStore.Models
         public System.DateTime orderDate { get; set; }
         public decimal totalPrice { get; set; }
         public string orderStatus { get; set; }
+        public string deliveryAddress { get; set; }
     
         public virtual client client { get; set; }
     }

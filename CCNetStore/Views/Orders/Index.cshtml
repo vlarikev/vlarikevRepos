@@ -23,6 +23,9 @@
         <th>
             @Html.DisplayNameFor(model => model.orderStatus)
         </th>
+        <th>
+            @Html.DisplayNameFor(model => model.deliveryAddress)
+        </th>
         <th></th>
     </tr>
 
@@ -45,7 +48,10 @@
                 @Html.DisplayFor(modelItem => item.orderStatus)
             </td>
             <td>
-                @Html.ActionLink("Edit", "Edit", new { id = item.Id }) |
+                @Html.DisplayFor(modelItem => item.deliveryAddress)
+            </td>
+            <td>
+                @Html.ActionLink("Change delivery address", "Edit", new { id = item.Id }) |
                 @Html.ActionLink("Delete", "Delete", new { id = item.Id })
             </td>
         </tr>

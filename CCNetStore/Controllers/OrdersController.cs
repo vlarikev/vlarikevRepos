@@ -30,6 +30,7 @@ namespace CCNetStore.Controllers
             {
                 return RedirectToAction("IndexClient");
             }
+
             return View();
         }
 
@@ -38,7 +39,7 @@ namespace CCNetStore.Controllers
         public ActionResult ConfirmOrder()
         {
             int clientId = db.clients.FirstOrDefault(u => u.clientLogin == User.Identity.Name).clientId;
-            db.Orders.Add(new Order { clientId = clientId, orderDate = DateTime.Now, totalPrice = CartsController.totalPrice, orderStatus = "confirmed"});
+            db.Orders.Add(new Order { clientId = clientId, orderDate = DateTime.Now, totalPrice = CartsController.totalPrice, orderStatus = "confirmed", deliveryAddress = null});
             db.SaveChanges();
             CartsController.totalPrice = 0;
             return View();
@@ -75,7 +76,7 @@ namespace CCNetStore.Controllers
         }
 
         // GET: Orders/Edit/5
-        [Authorize(Roles = "admin, manager")]
+        [Authorize]
         public ActionResult Edit(int? id)
         {
             if (id == null)
@@ -92,16 +93,23 @@ namespace CCNetStore.Controllers
         }
 
         // POST: Orders/Edit/5
-        [Authorize(Roles = "admin, manager")]
+        [Authorize]
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public ActionResult Edit([Bind(Include = "Id,clientId,orderDate,totalPrice,orderStatus")] Order order)
+        public ActionResult Edit([Bind(Include = "Id,clientId,orderDate,totalPrice,orderStatus,deliveryAddress")] Order order)
         {
             if (ModelState.IsValid)
             {
                 db.Entry(order).State = EntityState.Modified;
                 db.SaveChanges();
-                return RedirectToAction("Index");
+                if(User.IsInRole("admin") || User.IsInRole("manager"))
+                {
+                    return RedirectToAction("Index");
+                }
+                else
+                {
+                    return RedirectToAction("IndexClient");
+                }
             }
             ViewBag.clientId = new SelectList(db.clients, "clientId", "clientLogin", order.clientId);
             return View(order);
