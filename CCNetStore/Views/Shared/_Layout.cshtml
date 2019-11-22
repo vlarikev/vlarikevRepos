@@ -8,24 +8,24 @@
     @Styles.Render("~/Content/css")
     @Scripts.Render("~/bundles/modernizr")
 </head>
-<body>
+<body style="background-color:whitesmoke">
     <div class="navbar navbar-inverse navbar-fixed-top">
         <div class="container">
             <div class="navbar-header">
                 @switch (User.Identity.Name)
                 {
                     case ("admin@mail.com"):
-                        @Html.ActionLink("Admin Page", "IndexAdmin", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Admin Page", "IndexManager", "Products", new { area = "" }, new { @class = "navbar-brand" })
                         break;
                     case ("manager@mail.com"):
-                        @Html.ActionLink("Manager Page", "IndexManager", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Manager Page", "IndexManager", "Products", new { area = "" }, new { @class = "navbar-brand" })
                         break;
                 }
                 @if (User.Identity.IsAuthenticated)
                 {
                     if (User.Identity.Name != "admin@mail.com" && User.Identity.Name != "manager@mail.com")
                     {
-                        @Html.ActionLink("Client Page", "IndexClient", "Home", new { area = "" }, new { @class = "navbar-brand" })
+                        @Html.ActionLink("Client Page", "IndexClient", "Products", new { area = "" }, new { @class = "navbar-brand" })
                     }
                 }
                 else
@@ -44,15 +44,15 @@
                             @switch (User.Identity.Name)
                             {
                                 case ("admin@mail.com"):
-                                    @Html.ActionLink(User.Identity.Name, "IndexAdmin", "Home")
+                                    @Html.ActionLink(User.Identity.Name, "IndexManager", "Products")
                                     break;
                                 case ("manager@mail.com"):
-                                    @Html.ActionLink(User.Identity.Name, "IndexManager", "Home")
+                                    @Html.ActionLink(User.Identity.Name, "IndexManager", "Products")
                                     break;
                             }
                             @if (User.Identity.Name != "admin@mail.com" && User.Identity.Name != "manager@mail.com")
                             {
-                                @Html.ActionLink(User.Identity.Name, "IndexClient", "Home")
+                                @Html.ActionLink(User.Identity.Name, "IndexClient", "Products")
                             }
                         </li>
                         <li>@Html.ActionLink("Logout", "Logout", "Account")</li>

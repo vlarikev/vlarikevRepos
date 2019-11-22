@@ -4,54 +4,70 @@
     ViewBag.Title = "IndexManager";
 }
 
-<h2>Catalog</h2>
+<div class="row">
+    <div class="col-md-2">
+        <div class="btn-group-vertical btn-group-lg btn-block" role="group" aria-label="Menu" style="border:groove;">
+            <h2 style="text-align:center">Menu</h2>
+            <button type="button" class="btn btn-default" style="border-top:groove; border-bottom:none; border-right:none; border-left:none; border-radius: 0%;" onclick="location.href='@Url.Action("IndexManager", "Products")'">Catalog</button>
+            <button type="button" class="btn btn-default" style="border:none; border-radius: 0%;" onclick="location.href='@Url.Action("Index", "Carts")'">Cart</button>
+            <button type="button" class="btn btn-default" style="border:none; border-radius: 0%;" onclick="location.href='@Url.Action("Index", "Orders")'">Orders</button>
+            @if (User.IsInRole("admin"))
+            {
+                <button type="button" class="btn btn-default" style="border:none; border-radius: 0%;" onclick="location.href='@Url.Action("Index", "Clients")'">Clients</button>
+            }
+        </div>
+    </div>
+    <div class="col-md-10" style="border:groove">
+        <h2 style="text-align:center">* Welcome to Catalog *</h2>
+        <p>
+            @Html.ActionLink("Create New", "Create")
+        </p>
+        <table class="table">
+            <tr>
+                <th>
+                    @Html.DisplayName("Product Id")
+                </th>
+                <th>
+                    @Html.DisplayName("Product name")
+                </th>
+                <th>
+                    @Html.DisplayName("Quantity")
+                </th>
+                <th>
+                    @Html.DisplayName("Description")
+                </th>
+                <th>
+                    @Html.DisplayName("Price")
+                </th>
+                <th></th>
+            </tr>
 
-<p>
-    @Html.ActionLink("Create New", "Create")
-</p>
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayName("Product Id")
-        </th>
-        <th>
-            @Html.DisplayName("Product name")
-        </th>
-        <th>
-            @Html.DisplayName("Quantity")
-        </th>
-        <th>
-            @Html.DisplayName("Description")
-        </th>
-        <th>
-            @Html.DisplayName("Price")
-        </th>
-        <th></th>
-    </tr>
+            @foreach (var item in Model)
+            {
+                <tr>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.productId)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.productName)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.productQuantity)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.productDescription)
+                    </td>
+                    <td>
+                        @Html.DisplayFor(modelItem => item.productPrice)
+                    </td>
+                    <td>
+                        @Html.ActionLink("Edit", "Edit", new { id = item.productId }) |
+                        @Html.ActionLink("Details", "Details", new { id = item.productId }) |
+                        @Html.ActionLink("Delete", "Delete", new { id = item.productId })
+                    </td>
+                </tr>
+            }
 
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.productId)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.productName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.productQuantity)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.productDescription)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.productPrice)
-    </td>
-    <td>
-        @Html.ActionLink("Edit", "Edit", new { id = item.productId }) |
-        @Html.ActionLink("Details", "Details", new { id = item.productId }) |
-        @Html.ActionLink("Delete", "Delete", new { id = item.productId })
-    </td>
-</tr>
-}
-
-</table>
+        </table>
+    </div>
+</div>

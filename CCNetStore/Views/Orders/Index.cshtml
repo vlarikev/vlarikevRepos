@@ -3,58 +3,70 @@
 @{
     ViewBag.Title = "Index";
 }
-
-<h2>Orders @User.Identity.Name</h2>
-
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayName("Client Id")
-        </th>
-        <th>
-            @Html.DisplayName("Login")
-        </th>
-        <th>
-            @Html.DisplayName("Date")
-        </th>
-        <th>
-            @Html.DisplayName("Total price")
-        </th>
-        <th>
-            @Html.DisplayName("Order status")
-        </th>
-        <th>
-            @Html.DisplayName("Delivery address")
-        </th>
-        <th></th>
-    </tr>
-
-    @foreach (var item in Model)
-    {
+<div class="col-md-2">
+    <div class="btn-group-vertical btn-group-lg btn-block" role="group" aria-label="Menu" style="border:groove;">
+        <h2 style="text-align:center">Menu</h2>
+        <button type="button" class="btn btn-default" style="border-top:groove; border-bottom:none; border-right:none; border-left:none; border-radius: 0%;" onclick="location.href='@Url.Action("IndexManager", "Products")'">Catalog</button>
+        <button type="button" class="btn btn-default" style="border:none; border-radius: 0%;" onclick="location.href='@Url.Action("Index", "Carts")'">Cart</button>
+        <button type="button" class="btn btn-default" style="border:none; border-radius: 0%;" onclick="location.href='@Url.Action("Index", "Orders")'">Orders</button>
+        @if (User.IsInRole("admin"))
+        {
+            <button type="button" class="btn btn-default" style="border:none; border-radius: 0%;" onclick="location.href='@Url.Action("Index", "Clients")'">Clients</button>
+        }
+    </div>
+</div>
+<div class="col-md-10" style="border:groove">
+    <h2 style="text-align:center">* Orders *</h2>
+    <table class="table">
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.clientId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.client.clientLogin)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.orderDate)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.totalPrice)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.orderStatus)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.deliveryAddress)
-            </td>
-            <td>
-                @Html.ActionLink("Change delivery address", "Edit", new { id = item.Id }) |
-                @Html.ActionLink("Delete", "Delete", new { id = item.Id })
-            </td>
+            <th>
+                @Html.DisplayName("Client Id")
+            </th>
+            <th>
+                @Html.DisplayName("Login")
+            </th>
+            <th>
+                @Html.DisplayName("Date")
+            </th>
+            <th>
+                @Html.DisplayName("Total price")
+            </th>
+            <th>
+                @Html.DisplayName("Order status")
+            </th>
+            <th>
+                @Html.DisplayName("Delivery address")
+            </th>
+            <th></th>
         </tr>
-    }
 
-</table>
+        @foreach (var item in Model)
+        {
+            <tr>
+                <td>
+                    @Html.DisplayFor(modelItem => item.clientId)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.client.clientLogin)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.orderDate)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.totalPrice)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.orderStatus)
+                </td>
+                <td>
+                    @Html.DisplayFor(modelItem => item.deliveryAddress)
+                </td>
+                <td>
+                    @Html.ActionLink("Change delivery address", "Edit", new { id = item.Id }) |
+                    @Html.ActionLink("Delete", "Delete", new { id = item.Id })
+                </td>
+            </tr>
+        }
+
+    </table>
+</div>

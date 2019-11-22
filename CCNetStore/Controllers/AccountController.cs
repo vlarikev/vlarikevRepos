@@ -60,15 +60,15 @@ namespace CCNetStore.Controllers
                     
                     if (user.clientRole == "admin")
                     {
-                        return RedirectToAction("IndexAdmin", "Home");
+                        return RedirectToAction("IndexManager", "Products");
                     }
                     if (user.clientRole == "manager")
                     {
-                        return RedirectToAction("IndexManager", "Home");
+                        return RedirectToAction("IndexManager", "Products");
                     }
                     if (user.clientRole == "client")
                     {
-                        return RedirectToAction("IndexClient", "Home", new { id = user.clientId });
+                        return RedirectToAction("IndexClient", "Products", new { id = user.clientId });
                     }
                 }
             }

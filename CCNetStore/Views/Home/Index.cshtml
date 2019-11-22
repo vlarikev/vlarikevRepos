@@ -9,15 +9,15 @@
         <h2>You are authorized as @User.Identity.Name</h2>
         @if (User.IsInRole("admin"))
         {
-            <h3>@Html.ActionLink("Admin Page", "IndexAdmin", "Home")</h3>
+            <h3>@Html.ActionLink("Admin Page", "IndexManager", "Products")</h3>
         }
         else if (User.IsInRole("manager"))
         {
-            <h3>@Html.ActionLink("Manager Page", "IndexManager", "Home")</h3>
+            <h3>@Html.ActionLink("Manager Page", "IndexManager", "Products")</h3>
         }
         else
         {
-            <h3>@Html.ActionLink("Client Page", "IndexClient", "Home")</h3>
+            <h3>@Html.ActionLink("Client Page", "IndexClient", "Products")</h3>
         }
     </div>
 }

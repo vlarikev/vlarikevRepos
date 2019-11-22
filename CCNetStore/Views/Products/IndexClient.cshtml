@@ -3,44 +3,55 @@
 @{
     ViewBag.Title = "IndexClient";
 }
+    <div class="row">
+        <div class="col-md-2">
+            <div class="btn-group-vertical btn-group-lg btn-block" role="group" aria-label="Menu" style="border:groove;">
+                <h2 style="text-align:center">Menu</h2>
+                <button type="button" class="btn btn-default" style="border-top:groove; border-bottom:none; border-right:none; border-left:none; border-radius: 0%;" onclick="location.href='@Url.Action("IndexClient", "Products")'">Catalog</button>
+                <button type="button" class="btn btn-default" style="border:none; border-radius: 0%;" onclick="location.href='@Url.Action("IndexClient", "Carts")'">Cart</button>
+                <button type="button" class="btn btn-default" style="border:none; border-radius: 0%;" onclick="location.href='@Url.Action("IndexClient", "Orders")'">Orders</button>
+            </div>
+        </div>
+        <div class="col-md-10" style="border:groove">
+            <h2 style="text-align:center">* Welcome to Catalog *</h2>
+            <table class="table">
+                <tr>
+                    <th>
+                        @Html.DisplayName("Product name")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Quantity")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Description")
+                    </th>
+                    <th>
+                        @Html.DisplayName("Price")
+                    </th>
+                    <th></th>
+                </tr>
 
-<h2>Catalog</h2>
+                @foreach (var item in Model)
+                {
+                    <tr>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.productName)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.productQuantity)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.productDescription)
+                        </td>
+                        <td>
+                            @Html.DisplayFor(modelItem => item.productPrice)
+                        </td>
+                        <td>
+                            @Html.ActionLink("Add to cart", "AddToCart", new { id = item.productId, name = item.productName, price = item.productPrice })
+                        </td>
+                    </tr>
+                }
 
-<table class="table">
-    <tr>
-        <th>
-            @Html.DisplayName("Product name")
-        </th>
-        <th>
-            @Html.DisplayName("Quantity")
-        </th>
-        <th>
-            @Html.DisplayName("Description")
-        </th>
-        <th>
-            @Html.DisplayName("Price")
-        </th>
-        <th></th>
-    </tr>
-
-@foreach (var item in Model) {
-<tr>
-    <td>
-        @Html.DisplayFor(modelItem => item.productName)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.productQuantity)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.productDescription)
-    </td>
-    <td>
-        @Html.DisplayFor(modelItem => item.productPrice)
-    </td>
-    <td>
-        @Html.ActionLink("Add to cart", "AddToCart", new { id = item.productId, name = item.productName, price = item.productPrice})
-    </td>
-</tr>
-}
-
-</table>
+            </table>
+        </div>
+    </div>

@@ -218,7 +218,6 @@
     <Content Include="Views\Shared\Error.cshtml" />
     <Content Include="Views\Shared\_Layout.cshtml" />
     <Content Include="Views\Home\About.cshtml" />
-    <Content Include="Views\Home\IndexAdmin.cshtml" />
     <Content Include="Views\Products\Create.cshtml" />
     <Content Include="Views\Products\Delete.cshtml" />
     <Content Include="Views\Products\Details.cshtml" />
@@ -233,9 +232,7 @@
     <Content Include="Views\Carts\Index.cshtml" />
     <Content Include="Views\Account\Register.cshtml" />
     <Content Include="Views\Account\Login.cshtml" />
-    <Content Include="Views\Home\IndexManager.cshtml" />
     <Content Include="Views\Home\Index.cshtml" />
-    <Content Include="Views\Home\IndexClient.cshtml" />
     <Content Include="Views\Products\IndexClient.cshtml" />
     <Content Include="Views\Products\IndexManager.cshtml" />
     <Content Include="Views\Products\AddToCart.cshtml" />
