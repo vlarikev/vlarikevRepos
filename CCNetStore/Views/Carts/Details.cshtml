@@ -7,26 +7,25 @@
 <h2>Details</h2>
 
 <div>
-    <h4>cart</h4>
     <hr />
     <dl class="dl-horizontal">
         @Html.HiddenFor(model => model.productStatus)
         <dt>
-            @Html.DisplayNameFor(model => model.client.clientLogin)
+            @Html.DisplayName("Login")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.client.clientLogin)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.productName)
+            @Html.DisplayName("Product Name")
         </dt>
 
         <dd>
             @Html.DisplayFor(model => model.productName)
         </dd>
         <dt>
-            @Html.DisplayNameFor(model => model.cpQuantity)
+            @Html.DisplayName("Quantity")
         </dt>
 
         <dd>

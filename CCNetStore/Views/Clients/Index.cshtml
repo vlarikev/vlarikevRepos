@@ -4,20 +4,20 @@
     ViewBag.Title = "Index";
 }
 
-<h2>Index</h2>
+<h2>Users</h2>
 <p>
     @Html.ActionLink("Create New", "Create")
 </p>
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.clientLogin)
+            @Html.DisplayName("Login")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.clientPassword)
+            @Html.DisplayName("Password")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.clientRole)
+            @Html.DisplayName("Role")
         </th>
         <th></th>
     </tr>

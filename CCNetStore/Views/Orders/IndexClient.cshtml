@@ -9,22 +9,16 @@
 <table class="table">
     <tr>
         <th>
-            @Html.DisplayNameFor(model => model.clientId)
+            @Html.DisplayName("Date")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.client.clientLogin)
+            @Html.DisplayName("Total price")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.orderDate)
+            @Html.DisplayName("Order status")
         </th>
         <th>
-            @Html.DisplayNameFor(model => model.totalPrice)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.orderStatus)
-        </th>
-        <th>
-            @Html.DisplayNameFor(model => model.deliveryAddress)
+            @Html.DisplayName("Delivery address")
         </th>
         <th></th>
     </tr>
@@ -32,12 +26,6 @@
     @foreach (var item in Model)
     {
         <tr>
-            <td>
-                @Html.DisplayFor(modelItem => item.clientId)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.client.clientLogin)
-            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.orderDate)
             </td>

@@ -24,6 +24,10 @@ namespace CCNetStore.Controllers
             if (order.orderStatus == "confirmed")
             {
                 order.orderStatus = "PAYED";
+                int clientId = db.clients.FirstOrDefault(u => u.clientLogin == User.Identity.Name).clientId;
+                var carts = db.carts.Where(c => c.clientId == clientId).ToList();
+
+                db.carts.RemoveRange(carts);
                 db.SaveChanges();
             }
             else
@@ -153,11 +157,13 @@ namespace CCNetStore.Controllers
             
             int clientId = db.clients.FirstOrDefault(u => u.clientLogin == User.Identity.Name).clientId;
             var carts = db.carts.Where(c => c.clientId == clientId).ToList();
-            carts.ForEach(c => c.productStatus = "free");
 
-            var listId = carts.Select(c => c.productId);
-            var products = db.products.Where(p => listId.Contains(p.productId)).ToList();
-            products.ForEach(p => p.productQuantity++);
+            if (order.orderStatus != "PAYED")
+            {
+                var listId = carts.Select(c => c.productId);
+                var products = db.products.Where(p => listId.Contains(p.productId)).ToList();
+                products.ForEach(p => p.productQuantity++);
+            }
 
             db.carts.RemoveRange(carts);
 

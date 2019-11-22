@@ -20,8 +20,17 @@ namespace CCNetStore.Controllers
         {
             int clientId = db.clients.FirstOrDefault(u => u.clientLogin == User.Identity.Name).clientId;
 
-            db.carts.Add(new cart { clientId = clientId, productId = id, productName = name, cpQuantity = 1, productStatus = "free"});
-            db.SaveChanges();
+            var orders = db.carts.Where(c => c.clientId == clientId && c.productStatus == "reservated").FirstOrDefault();
+
+            if (orders == null)
+            {
+                db.carts.Add(new cart { clientId = clientId, productId = id, productName = name, cpQuantity = 1, productStatus = "free" });
+                db.SaveChanges();
+            }
+            else
+            {
+                return RedirectToAction("IndexClient");
+            }
 
             return View();
         }
