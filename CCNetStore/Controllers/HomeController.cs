@@ -10,6 +10,7 @@ namespace CCNetStore.Controllers
     {
         public ActionResult Index()
         {
+            //Test for second branch
             return View();
         }
 
