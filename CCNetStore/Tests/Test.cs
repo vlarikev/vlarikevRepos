@@ -14,7 +14,7 @@ namespace CCNetStore.Tests
         [Test]
         public void TestCartToList()
         {
-            List<cart> l = db.carts.Where(c => c.clientId == 3).ToList();
+            List<cart> l = db.carts.Where(c => c.clientId == 10).ToList();
             Assert.AreEqual(4, l.Count());
         }
         [Test]
@@ -22,7 +22,7 @@ namespace CCNetStore.Tests
         {
             var carts = db.carts.Include(c => c.client).Include(c => c.product);
 
-            decimal i = carts.Where(c => c.client.clientLogin == "client@mail.com").Sum(p => p.product.productPrice).Value;
+            decimal i = carts.Where(c => c.client.clientLogin == "test@mail.com").Sum(p => p.product.productPrice).Value;
             Assert.AreEqual(38000.00, i);
         }
     }
