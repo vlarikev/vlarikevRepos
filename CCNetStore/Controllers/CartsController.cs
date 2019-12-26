@@ -28,7 +28,7 @@ namespace CCNetStore.Controllers
             var carts = db.carts.Include(c => c.client).Include(c => c.product);
             if(carts.Where(c => c.client.clientLogin == User.Identity.Name).FirstOrDefault() != null && carts.Where(c => c.productStatus == "free").FirstOrDefault() != null)
             {
-                totalPrice = carts.Where(c => c.client.clientLogin == User.Identity.Name && c.productStatus == "free").Sum(p => p.product.productPrice).Value;
+                totalPrice = carts.Where(c => c.client.clientLogin == User.Identity.Name).Sum(p => p.product.productPrice).Value;
             }
             return View(carts.Where(c => c.client.clientLogin == User.Identity.Name && c.productStatus == "free").ToList());
         }

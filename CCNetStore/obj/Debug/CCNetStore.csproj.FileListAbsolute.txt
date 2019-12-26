@@ -176,3 +176,6 @@ C:\Users\vlarikev\source\repos\GitRep\CCNetStore\obj\Debug\CCNetStore.csproj.Cor
 C:\Users\vlarikev\source\repos\GitRep\CCNetStore\obj\Debug\CCNetStore.csproj.CopyComplete
 C:\Users\vlarikev\source\repos\GitRep\CCNetStore\obj\Debug\CCNetStore.dll
 C:\Users\vlarikev\source\repos\GitRep\CCNetStore\obj\Debug\CCNetStore.pdb
+C:\Users\vlarikev\source\repos\GitRep\CCNetStore\bin\nunit.framework.dll
+C:\Users\vlarikev\source\repos\GitRep\CCNetStore\bin\nunit.framework.pdb
+C:\Users\vlarikev\source\repos\GitRep\CCNetStore\bin\nunit.framework.xml
